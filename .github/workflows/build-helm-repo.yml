@@ -1,0 +1,20 @@
+name: Build Helm Repo
+
+on:
+  push:
+    branches: ['release'] 
+  workflow_dispatch:
+
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    name: Build docker image and push it to ghcr registry
+    steps:
+      - name: Build
+        run: |
+          helm package springboot-chart
+          helm repo index .
+
+
+
