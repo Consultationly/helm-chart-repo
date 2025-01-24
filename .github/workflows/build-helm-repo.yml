@@ -29,7 +29,7 @@ jobs:
       - name: Build
         run: |
           helm package springboot-chart
-          helm repo index .
+          helm repo index . --url https://consultationly.github.io/helm-chart-repo
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
