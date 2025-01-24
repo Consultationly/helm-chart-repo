@@ -61,13 +61,13 @@ spec:
       volumes:
         - name: logging
           configMap:
-            name: {{ include "spring-boot-microservice.fullname" . }}
+            name: {{ include "springboot-chart.fullname" . }}
             items:
               - key: "logging.yaml"
                 path: logging.yaml
         - name: application
           configMap:
-            name: {{ include "spring-boot-microservice.fullname" . }}
+            name: {{ include "springboot-chart.fullname" . }}
             items:
               - key: "application.yaml"
                 path: application.yaml
