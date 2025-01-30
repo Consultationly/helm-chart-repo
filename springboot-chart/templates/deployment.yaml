@@ -48,11 +48,11 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: logging
-              mountPath: /etc/config/app/logging.yaml
+              mountPath: /config/logging.yaml
               readOnly: true
               subPath: logging.yaml
             - name: application
-              mountPath: /etc/config/app/application.yaml
+              mountPath: /config/application.yaml
               readOnly: true
               subPath: application.yaml
           {{- with .Values.volumeMounts }}
