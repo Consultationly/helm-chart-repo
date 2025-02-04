@@ -58,6 +58,19 @@ spec:
           {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          env:
+          {{- range $name, $value := .Values.env }}
+            - name: {{ $name }}
+              value: {{ $value }}
+          {{- end }}
+          {{- range $name, $secretName, $secretKey := .Values.envSecrets }}
+            - name: {{ $name }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $secretName }}
+                  key: {{ $secretKey }}
+          {{- end }}
+
       volumes:
         - name: logging
           configMap:
