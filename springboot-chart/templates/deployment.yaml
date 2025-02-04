@@ -67,8 +67,8 @@ spec:
             - name: {{ $name }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ $secretName }}
-                  key: {{ $secretKey }}
+                  name: ma-secrets
+                  key: {{ $value }}
           {{- end }}
 
       volumes:
