@@ -59,17 +59,11 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           env:
-          {{- range $name, $value := .Values.env }}
+          {{- range $name, $item := .Values.env }}
             - name: {{ $name }}
-              value: {{ $value }}
+              {{- $item | toYaml | nindent 14 }}
           {{- end }}
-          {{- range $name, $value := .Values.envSecrets }}
-            - name: {{ $name }}
-              valueFrom:
-                secretKeyRef:
-                  name: ma-secrets
-                  key: {{ $value }}
-          {{- end }}
+
 
       volumes:
         - name: logging
