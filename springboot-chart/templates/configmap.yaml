@@ -15,7 +15,7 @@ data:
   {{- with .Values.config.log4j }}
   logging.yaml: >-
     {{- tpl . $ | nindent 4 }}
-    {{- end }}
+  {{- end }}
   {{- with .Values.config.application }}
   application.yaml: >-
     {{- tpl . $ | nindent 4 }}
