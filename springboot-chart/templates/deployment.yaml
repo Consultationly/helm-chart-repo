@@ -70,13 +70,13 @@ spec:
           configMap:
             name: {{ include "springboot-chart.fullname" . }}
             items:
-              - key: "logging.yaml"
+              - key: logging.yaml
                 path: logging.yaml
         - name: application
           configMap:
             name: {{ include "springboot-chart.fullname" . }}
             items:
-              - key: "application.yaml"
+              - key: application.yaml
                 path: application.yaml
       {{- with .Values.volumes }}
         {{- toYaml . | nindent 8 }}
