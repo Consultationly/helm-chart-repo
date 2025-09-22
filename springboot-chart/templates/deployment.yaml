@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "springboot-chart.fullname" . }}
   labels:
-    {{- include "springboot-chart.labels" . | nindent 4 }}
+  {{- include "springboot-chart.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -47,11 +47,11 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            - name: logging
+            - name: logging-volume
               mountPath: /config/logging.yaml
               readOnly: true
               subPath: logging.yaml
-            - name: application
+            - name: application-volume
               mountPath: /config/application.yaml
               readOnly: true
               subPath: application.yaml
@@ -64,15 +64,14 @@ spec:
               {{- $item | toYaml | nindent 14 }}
           {{- end }}
 
-
       volumes:
-        - name: logging
+        - name: logging-volume
           configMap:
             name: {{ include "springboot-chart.fullname" . }}
             items:
               - key: logging.yaml
                 path: logging.yaml
-        - name: application
+        - name: application-volume
           configMap:
             name: {{ include "springboot-chart.fullname" . }}
             items:
