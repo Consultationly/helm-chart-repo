@@ -13,10 +13,12 @@ spec:
       {{- include "springboot-chart.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
+        # Roll pods automatically when the mounted config (application.yaml/logging.yaml) changes.
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
-      {{- end }}
+        {{- end }}
       labels:
         {{- include "springboot-chart.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
